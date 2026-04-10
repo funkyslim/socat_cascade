@@ -6,6 +6,8 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m'
 
+SCRIPT_PATH="/usr/local/bin/iptables_cascade"
+
 print_menu() {
     echo
     echo -e "${GREEN}==========================${NC}"
@@ -23,9 +25,9 @@ require_root() {
 }
 
 prepare() {
-    if [ "$0" != "/usr/local/bin/iptables_cascade" ]; then
-        cp -f "$0" "/usr/local/bin/iptables_cascade"
-        chmod +x "/usr/local/bin/iptables_cascade"
+    if [ "$0" != "$SCRIPT_PATH" ]; then
+        cp -f "$0" "$SCRIPT_PATH"
+        chmod +x "$SCRIPT_PATH"
     fi
 
     if grep -Eq '^[[:space:]]*#?[[:space:]]*net\.ipv4\.ip_forward=' /etc/sysctl.conf; then
